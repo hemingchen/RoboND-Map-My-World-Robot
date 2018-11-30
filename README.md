@@ -391,7 +391,7 @@ The custom environment is built upon the `cafe` model that comes with `Gazebo`. 
 ## Discussion
 In general, mapping both virtual worlds were successful. Mapping in 2D was relatively easier, a decent 2D map could be generated after 1 or 2 passes at moderate travel speed. 
 
-Generating good 3D map however took more passes and demanded slower travel speed to generate more smooth, continuous data flow. This was especially important when mapping a relatively complex environment, such as the kitchen world.
+Generating good 3D map however took more passes and demanded slower travel speed for more smooth, continuous data flow. This was especially important when mapping a relatively complex environment, such as the kitchen world.
 
 It occurred to me that rotating movements of the robot would cause the mapping node to continuously throw warnings about insufficient inliners. It was possibly due to robot not having liner speed and `RTAB-Map` was confused. Minimizing rotating movements (`J` and `L` key in `teleop`) seemed to solve the problem.
 
@@ -412,13 +412,14 @@ cd /home/workspace/catkin_ws
 catkin_make
 ```
 
-Before running the package, please note somehow collision was not enabled in my copy of Udacity world, hence the robot can go through all objects and mapping will not work. On the Slack channel, a solution was offered by other students - run the following script to enable collision, which has also been added to the beginning of `rtab_run` script:
+Before running the package, please note somehow collision was not enabled in my copy of Udacity supplied world file, hence the robot can go through all objects making SLAM not working. On the Slack channel, a solution was offered by other students - run the following script to enable collision, which has also been added to the beginning of `rtab_run` script:
 ```bash
 curl -L https://s3-us-west-1.amazonaws.com/udacity-robotics/Term+2+Resources/P3+Resources/models.tar.gz | tar zx -C ~/.gazebo/
 ``` 
 
 Now, open a terminal window and run:
 ```bash
+cd /home/workspace/catkin_ws
 source devel/setup.bash
 cd src/slam_project
 ./rtab_run
@@ -428,4 +429,4 @@ At the first prompt, enter `y` to remove previous map. Then either enter `d` to 
 
 Once `Gazebo` is up and running, go back to the first terminal window and hit any key to start mapping. More terminal windows will then pop up. From there on, we can control the robot in the terminal running the `teleop` node and map the world.
 
-To stop mapping, we HAVE TO hit `ctrl+c` to terminate the mapping node, which upon shutting down will tell us map has been saved to hard drive. Simply closing the mapping node terminal window WILL NOT save the map, hence `rtabmap-databaseViewer` will also show an empty map.
+To stop mapping, we HAVE TO hit `ctrl+c` to terminate the mapping node, which upon shutting down will print that map has been saved to hard drive. Simply closing the mapping node terminal window WILL NOT save the map, hence `rtabmap-databaseViewer` will also show an empty map.

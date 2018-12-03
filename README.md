@@ -46,7 +46,7 @@ Robot specs and screenshot are given below.
 | wheel              | Cylinder | R=0.05 L=0.05|
 | caster             | Sphere   | R=0.025      |
 
-![alt text](misc/custom_robot.png)
+![](misc/custom_robot.png)
 
 
 The updated custom robot model xacro file is given blow.
@@ -376,13 +376,13 @@ This project requires the robot to SLAM in both a Udacity provided virtual world
 ### Udacity World
 The Udacity provided environment is a kitchen-dining space consists of 3 segments - an unoccupied small space, a kitchen space and a dining space. The robot needs to go over each space multiple times to generate enough loop closures and create an accurate map of the environment. A screenshot is given below.
 
-![alt text](misc/kitchen_dining.png)
+![](misc/kitchen_dining.png)
 
 
 ### Custom World
 The custom environment is built upon the `cafe` model that comes with `Gazebo`. Some small to mid sized objects are added, such as cabinets, concrete blocks, boxes, etc., to create more features for robot to capture during mapping. A screenshot is given below.
 
-![alt text](misc/myworld.png)
+![](misc/myworld.png)
 
 
 ## Results
@@ -390,9 +390,27 @@ The custom environment is built upon the `cafe` model that comes with `Gazebo`. 
 ### Udacity World
 It took the robot 3 loops around the "kitchen-dining" world to generate a satisfying map. It turned out the best way was to map one room completely for 3 loops and then move onto the next room. Switching between rooms at each loop sometimes could confuse the `RTAB-Map` algorithm, possibly due to lack of features in the hall way.
 
-During the mapping, robot's linear speed was increased to `xxx` and angular speed remained the default value `xxx`. The screenshot below shows the completed map.
+During the mapping, robot's linear speed was increased to `~0.4` and angular speed remained the default value `1.0`. The screenshots below present the SLAM process.
 
-![alt text](misc/kitchen_dining_completed_map.png)
+First, run 3 loops in the kitchen area:
+
+| Loop 1                                        | Loop 2                                          | Loop 3                                          |
+:----------------------------------------------:|:-----------------------------------------------:|:-----------------------------------------------:
+![](misc/kitchen_dining_map_kitchen_loop_1.png) | ![](misc/kitchen_dining_map_kitchen_loop_2.png) | ![](misc/kitchen_dining_map_kitchen_loop_3.png) 
+
+Then, drive the robot to the dining area and run another 3 loops:
+
+First, run 3 loops in the kitchen area:
+
+| Loop 1                                        | Loop 2                                          | Loop 3                                          |
+:----------------------------------------------:|:-----------------------------------------------:|:-----------------------------------------------:
+![](misc/kitchen_dining_map_dining_loop_1.png)  | ![](misc/kitchen_dining_map_dining_loop_2.png)  | ![](misc/kitchen_dining_map_dining_loop_3.png) 
+
+The completed maps for Udacity virtual world are
+
+| 2D Map                                        | 3D Map                                          |
+:----------------------------------------------:|:-----------------------------------------------:
+![](misc/kitchen_dining_completed_2D_map.png)   | ![](misc/kitchen_dining_completed_3D_map.png)
 
 ### Custom World
 Due to the simpler setup, it took the robot 2 loops to get an OK map for the custom world, and 3 loops for a decent one. Due to the drastic change of the flooring between the two segments of the custom world, the robot only mapped the area with dark wood flooring. Somehow switching between two areas at each loop would confuse the `RTAP-Map` algorithm and make the surveyed map unusable. 

@@ -371,7 +371,7 @@ The robot model gazebo file is given blow.
 ```
 
 ## Virtual World Setup
-This project requires the robot to SLAM in both a Udacity provided environment and a custom environment.
+This project requires the robot to SLAM in both a Udacity provided virtual world and a custom virtual world.
 
 ### Udacity World
 The Udacity provided environment is a kitchen-dining space consists of 3 segments - an unoccupied small space, a kitchen space and a dining space. The robot needs to go over each space multiple times to generate enough loop closures and create an accurate map of the environment. A screenshot is given below.
@@ -380,12 +380,24 @@ The Udacity provided environment is a kitchen-dining space consists of 3 segment
 
 
 ### Custom World
-The custom environment is built upon the `cafe` model that comes with `Gazebo`. I added some small to mid sized objects, such as cabinets, concrete blocks, boxes, etc., to create more features for robot to capture during mapping. A screenshot is given below.
+The custom environment is built upon the `cafe` model that comes with `Gazebo`. Some small to mid sized objects are added, such as cabinets, concrete blocks, boxes, etc., to create more features for robot to capture during mapping. A screenshot is given below.
 
 ![alt text](misc/myworld.png)
 
 
 ## Results
+
+### Udacity World
+It took the robot 3 loops around the "kitchen-dining" world to generate a satisfying map. It turned out the best way was to map one room completely for 3 loops and then move onto the next room. Switching between rooms at each loop sometimes could confuse the `RTAB-Map` algorithm, possibly due to lack of features in the hall way.
+
+During the mapping, robot's linear speed was increased to `xxx` and angular speed remained the default value `xxx`. The screenshot below shows the completed map.
+
+![alt text](misc/kitchen_dining_completed_map.png)
+
+### Custom World
+Due to the simpler setup, it took the robot 2 loops to get an OK map for the custom world, and 3 loops for a decent one. Due to the drastic change of the flooring between the two segments of the custom world, the robot only mapped the area with dark wood flooring. Somehow switching between two areas at each loop would confuse the `RTAP-Map` algorithm and make the surveyed map unusable. 
+
+During the mapping, robot's linear speed was increased to `xxx` and angular speed remained the default value `xxx`. The screenshot below shows the completed map.
 
 
 ## Discussion
@@ -393,9 +405,9 @@ In general, mapping both virtual worlds were successful. Mapping in 2D was relat
 
 Generating good 3D map however took more passes and demanded slower travel speed for more smooth, continuous data flow. This was especially important when mapping a relatively complex environment, such as the kitchen world.
 
-It occurred to me that rotating movements of the robot would cause the mapping node to continuously throw warnings about insufficient inliners. It was possibly due to robot not having liner speed and `RTAB-Map` was confused. Minimizing rotating movements (`J` and `L` key in `teleop`) seemed to solve the problem.
+It occurred to me that rotating movements of the robot would cause the mapping node to continuously throw warnings about insufficient inliers. It was possibly due to robot not having liner speed and `RTAB-Map` was confused. Minimizing rotating movements (`J` and `L` key in `teleop`) seemed to solve the problem.
 
-Another lesson learned was that the mount position and agle of the depth camera could also affect SLAM performance. The depth camera on my custom robot is mounted to a relatively low position hence cannot see objects very high if too close. It affected the mapping speed. Solution was to not travel too close to feature rich objects so as to catch more features in fewer passes.
+Another lesson learned was that the mount position and angle of the depth camera could also affect SLAM performance. The depth camera on my custom robot is mounted to a relatively low position hence cannot see objects very high if too close. It affected the mapping speed. Solution was to not travel too close to feature rich objects so as to catch more features in fewer passes.
 
 
 ## Future Work

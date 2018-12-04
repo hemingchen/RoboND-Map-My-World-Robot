@@ -382,10 +382,13 @@ The Udacity provided environment is a kitchen-dining space consists of 3 segment
 ### Custom World
 The custom environment is built upon the `cafe` model that comes with `Gazebo`. Some small to mid sized objects are added, such as cabinets, concrete blocks, boxes, etc., to create more features for robot to capture during mapping. A screenshot is given below.
 
-![](misc/myworld.png)
+![](misc/custom_world.png)
 
 
 ## Results
+Due to GitHub file size limitation, 3D maps are stored on Google Drive:
+- Udacity World: [http://](http://)
+- Custom World: [HERE]()
 
 ### Udacity World
 It took the robot 3 loops around the "kitchen-dining" world to generate a satisfying map. It turned out the best way was to map one room completely for 3 loops and then move onto the next room. Switching between rooms at each loop sometimes could confuse the `RTAB-Map` algorithm, possibly due to lack of features in the hall way.
@@ -400,8 +403,6 @@ First, run 3 loops in the kitchen area:
 
 Then, drive the robot to the dining area and run another 3 loops:
 
-First, run 3 loops in the kitchen area:
-
 | Loop 1                                        | Loop 2                                          | Loop 3                                          |
 :----------------------------------------------:|:-----------------------------------------------:|:-----------------------------------------------:
 ![](misc/kitchen_dining_map_dining_loop_1.png)  | ![](misc/kitchen_dining_map_dining_loop_2.png)  | ![](misc/kitchen_dining_map_dining_loop_3.png) 
@@ -412,10 +413,27 @@ The completed maps for Udacity virtual world are
 :----------------------------------------------:|:-----------------------------------------------:
 ![](misc/kitchen_dining_completed_2D_map.png)   | ![](misc/kitchen_dining_completed_3D_map.png)
 
+As in above picture, a total of 210 loop global loop closures were detected during SLAM.
+
+
 ### Custom World
 Due to the simpler setup, it took the robot 2 loops to get an OK map for the custom world, and 3 loops for a decent one. Due to the drastic change of the flooring between the two segments of the custom world, the robot only mapped the area with dark wood flooring. Somehow switching between two areas at each loop would confuse the `RTAP-Map` algorithm and make the surveyed map unusable. 
 
-During the mapping, robot's linear speed was increased to `xxx` and angular speed remained the default value `xxx`. The screenshot below shows the completed map.
+During the mapping, robot's linear speed was increased to `~0.35` and angular speed remained the default value `1.0`.
+
+The robot made 3 loops near the "wood flooring" area:
+
+| Loop 1                              | Loop 2                                | Loop 3                                |
+:------------------------------------:|:-------------------------------------:|:-------------------------------------:
+![](misc/custom_world_map_loop_1.png) | ![](misc/custom_world_map_loop_2.png) | ![](misc/custom_world_map_loop_3.png) 
+
+The completed maps for custom virtual world are
+
+| 2D Map                                        | 3D Map                                          |
+:----------------------------------------------:|:-----------------------------------------------:
+![](misc/custom_world_completed_2D_map.png)   | ![](misc/custom_world_completed_3D_map.png)
+
+As in above picture, a total of 165 loop global loop closures were detected during SLAM.
 
 
 ## Discussion
@@ -423,9 +441,9 @@ In general, mapping both virtual worlds were successful. Mapping in 2D was relat
 
 Generating good 3D map however took more passes and demanded slower travel speed for more smooth, continuous data flow. This was especially important when mapping a relatively complex environment, such as the kitchen world.
 
-It occurred to me that rotating movements of the robot would cause the mapping node to continuously throw warnings about insufficient inliers. It was possibly due to robot not having liner speed and `RTAB-Map` was confused. Minimizing rotating movements (`J` and `L` key in `teleop`) seemed to solve the problem.
+It occurred to me that rotating the robot in place would cause the mapping node to continuously throw warnings about insufficient inliers and disrupt the generated 3D map. It was possibly due to robot not having liner speed and `RTAB-Map` was confused. Minimizing rotating movements (`J` and `L` key in `teleop`) seemed to solve the problem.
 
-Another lesson learned was that the mount position and angle of the depth camera could also affect SLAM performance. The depth camera on my custom robot is mounted to a relatively low position hence cannot see objects very high if too close. It affected the mapping speed. Solution was to not travel too close to feature rich objects so as to catch more features in fewer passes.
+Another lesson learned was that the mount position and angle of the depth camera could also affect SLAM performance. The depth camera on my custom robot is mounted to a relatively low position hence cannot see tall objects if too close. It affected the mapping speed. Solution was to not travel too close to tall feature rich objects so as to catch more features in fewer passes.
 
 
 ## Future Work

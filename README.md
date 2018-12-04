@@ -14,7 +14,7 @@ All prior projects assume that the robot will perform its duties, such as locali
 In this project, the robot will generate 2D and 3D map and localize itself using the RTAB-Map approach both in an Udacity provided virtual world and a custom world previously not known to the robot. The main goal is the make as fewer passes as possible to generate at least 3 loop closures.
 
 ## Background
-In the area of localization, common methods include Kalman Filter (including EKF, Unscented KF, etc.) and Particle Filter.
+Multiple algorithms and tools are available today to solve mapping problem. The goal of this project is to solve SLAM problem, and we will mainly focus on Occupancy Grid Mapping, Grid-based FastSLAM, and GraphSLAM algorithms.
 
 ### Occupancy Grid Mapping
 Unlike SLAM algorithms, the occupancy grid mapping method assumes that the robot pose is known. Its main idea is to represent the world as a uniformly spaced grid, where each cell contains a random variables representing the probability that cell is occupied/obstacle. This nature makes this method suitable for navigation and trajectory planning, which can be difficult to do with SLAM.

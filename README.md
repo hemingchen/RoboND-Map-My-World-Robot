@@ -387,8 +387,8 @@ The custom environment is built upon the `cafe` model that comes with `Gazebo`. 
 
 ## Results
 Due to GitHub file size limitation, 3D maps are stored on Google Drive:
-- Udacity World: [http://](http://)
-- Custom World: [HERE]()
+- Udacity World: [https://drive.google.com/open?id=1GsDOWM_8uCr7S7-9capPgnE_01mhtFZj](https://drive.google.com/open?id=1GsDOWM_8uCr7S7-9capPgnE_01mhtFZj)
+- Custom World: [https://drive.google.com/open?id=1XrC8AQsxMM1olh_99rtqWe3pbNhfI_ye](https://drive.google.com/open?id=1XrC8AQsxMM1olh_99rtqWe3pbNhfI_ye)
 
 ### Udacity World
 It took the robot 3 loops around the "kitchen-dining" world to generate a satisfying map. It turned out the best way was to map one room completely for 3 loops and then move onto the next room. Switching between rooms at each loop sometimes could confuse the `RTAB-Map` algorithm, possibly due to lack of features in the hall way.
